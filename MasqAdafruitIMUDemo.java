@@ -16,10 +16,13 @@ public class MasqAdafruitIMUDemo extends LinearOpMode {
         MasqAdafruitIMU imu = new MasqAdafruitIMU("IMU", hardwareMap);
 
         // wait to see this on the Driver Station before pressing play, to make sure the IMU has been initialized
-        telemetry.addData("Status", "Initialization Complete");
-        telemetry.update();
+        while (!isStarted()) {
+            telemetry.addData("Status", "Initialization Complete");
+            telemetry.update();
+        }
         
         waitForStart();
+        telemetry.clear();
 
         while (opModeIsActive()) {
             // the next 4 lines show how to retrieve angles from the imu and use them
