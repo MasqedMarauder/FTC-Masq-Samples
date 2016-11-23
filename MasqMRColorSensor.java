@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcontroller.internal.FtcOpModeRegister;
 
 import java.util.Locale;
@@ -48,10 +50,10 @@ public class MasqMRColorSensor {
             whiteMinThreshold = 14, whiteMaxThreshold = 16;
 
 
-    public MasqMRColorSensor(String name, int i2cAddress) {
+    public MasqMRColorSensor(String name, int i2cAddress, HardwareMap hwmap) {
         this.name = name;
 
-        colorSensor = FtcOpModeRegister.opModeManager.getHardwareMap().i2cDevice.get(name);
+        colorSensor = hwmap.i2cDevice.get(name);
         colorSensor.resetDeviceConfigurationForOpMode();
 
         colorSensorManager = new I2cDeviceSynchImpl(colorSensor, I2cAddr.create8bit(i2cAddress), false);
